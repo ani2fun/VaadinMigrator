@@ -1,0 +1,81 @@
+
+
+<RuleSet>
+<Rule>
+    <OldPattern>\Qimport com.vaadin.Application;\E</OldPattern>
+    <NewPattern>import com.vaadin.server.VaadinRequest;</NewPattern>
+    <Comments>//Vaadin 6 application concerns the com.vaadin.Application class - it exists no more, now it is com.vaadin.server.VaadinRequest
+    </Comments>
+    <additionalPattern></additionalPattern>
+</Rule>
+
+<Rule>
+    <OldPattern>&lt;servlet-class&gt;com.vaadin.terminal.gwt.server.ApplicationServlet&lt;/servlet-class&gt;</OldPattern>
+    <NewPattern>&lt;servlet-class&gt;com.vaadin.server.VaadinServlet&lt;/servlet-class&gt;/</NewPattern>
+    <Comments>&lt;!--replace com.vaadin.terminal.gwt.server.ApplicationServlet with com.vaadin.server.VaadinServlet in web.xml--&gt;
+    </Comments>
+    <additionalPattern></additionalPattern>
+</Rule>
+
+<Rule>
+    <OldPattern>\Qinit()\E</OldPattern>
+    <NewPattern>init(VaadinRequest request)</NewPattern>
+    <Comments>//The property of init method was changed. No we have to add VaadinRequest object as a parameter to the init method
+    </Comments>
+    <additionalPattern></additionalPattern>
+</Rule>
+
+<Rule>
+    <OldPattern>\Qextends Application\E</OldPattern>
+    <NewPattern>extends UI</NewPattern>
+    <Comments>//In parameter application replace with UI pointing to your UI class
+    </Comments>
+    <additionalPattern></additionalPattern>
+</Rule>
+
+<Rule>
+    <OldPattern>\QsetMainWindow(mainWindow);\E</OldPattern>
+    <NewPattern>//setMainWindow(mainWindow);</NewPattern>
+    <Comments>//setMainWindow is not use anymore in Vaadin 7.
+    </Comments>
+    <additionalPattern></additionalPattern>
+</Rule>
+
+<Rule>
+    <OldPattern>setTheme\(</OldPattern>
+    <NewPattern>//setTheme(</NewPattern>
+    <Comments>//In new version of Vaadin,the theme selected with an @Theme annotation on your UI class rather than a call to setTheme()
+    </Comments>
+    <additionalPattern></additionalPattern>
+
+
+</Rule>
+
+<Rule>
+    <OldPattern>\QWindow.showNotification()\E</OldPattern>
+    <NewPattern>Notification.show()</NewPattern>
+    <Comments>//The API for Notifications has also changed, static methods Notification.show() are now used instead of Window.showNotification().
+    </Comments>
+    <additionalPattern></additionalPattern>
+</Rule>
+    <Rule>
+        <OldPattern>\\extends.*\\Application</OldPattern>
+        <NewPattern>SQLContainer</NewPattern>
+        <Comments>The ancient QueryContainer has been removed, so it is time to switch to SQLContainer or some other container implementation
+        </Comments>
+        <additionalPattern></additionalPattern>
+    </Rule>
+
+    <Rule>
+        <OldPattern>[a-zA-Z0-9]*\s*[a-zA-Z0-9]*\s*=\s*new\s*Window.*</OldPattern>
+        <NewPattern>//= new Window</NewPattern>
+        <Comments>//The class Window is now only used for "sub-windows" (windows floating inside the page) , not "browser level" windows or tabs (the whole web page)
+        </Comments>
+        <additionalPattern>marker VerticalLayout view = new VerticalLayout();-setContent(</additionalPattern>
+
+    </Rule>
+
+
+</RuleSet>
+
+

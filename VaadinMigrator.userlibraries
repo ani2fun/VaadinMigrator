@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<eclipse-userlibraries>
+  <library name="commons-io-2.4">
+    <archive path="/Users/aniket/IdeaProjects/VaadinMigrator/ExternalLib/commons-io-2.4.jar" />
+  </library>
+</eclipse-userlibraries>
+
